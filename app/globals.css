@@ -35,19 +35,20 @@ body {
 }
 
 .neonText:hover {
-  color: #fff;
+  /* color: #fff;
   box-shadow: 0 0 .2rem #fff,
     0 0 .2rem #fff,
     0 0 2rem #bc13fe,
     0 0 0.8rem #bc13fe,
     0 0 2.8rem #bc13fe,
     inset 0 0 1.3rem #bc13fe;
-  outline: 0.2rem solid #fff;
-}
-
-.neonText.blink {
+  outline: 0.2rem solid #fff; */
   animation: pulsate 2.5s infinite alternate;
 }
+
+/* .neonText.blink {
+  animation: pulsate 2.5s infinite alternate;
+} */
 
 
 @keyframes pulsate {

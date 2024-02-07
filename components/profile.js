@@ -13,17 +13,17 @@ function Profile() {
             <p className=" text-sm text-gray-400 mt-5">© 2024 Ratnajit. All Rights Reserved</p>
             <ul className=" flex justify-center items-center flex-wrap gap-2 mt-5">
                 <li>
-                    <a className="group block w-12 h-12 border-2 border-gray-500 hover:border-green-300 rounded-full text-center leading-[46px] cursor-pointer transition duration-1000">
+                    <a  className="group block w-12 h-12 border-2 border-gray-500 hover:border-green-300 rounded-full text-center leading-[46px] cursor-pointer transition duration-1000">
                         <i className="lab la-github text-xl text-gray-500 group-hover:text-green-300 transition duration-1000"></i>
                     </a>
                 </li>
                 <li>
-                    <a className="group block w-12 h-12 border-2 border-gray-500 hover:border-green-300 rounded-full text-center leading-[46px] cursor-pointer transition duration-1000">
+                    <a href="https://in.linkedin.com/in/ratnajit-swain" className="group block w-12 h-12 border-2 border-gray-500 hover:border-green-300 rounded-full text-center leading-[46px] cursor-pointer transition duration-1000">
                         <i className="lab la-linkedin text-xl text-gray-500 group-hover:text-green-300 transition duration-1000"></i>
                     </a>
                 </li>
                 <li>
-                    <a className="group block w-12 h-12 border-2 border-gray-500 hover:border-green-300 rounded-full text-center leading-[46px] cursor-pointer transition duration-1000">
+                    <a href="https://twitter.com/ratnajit_swain" className="group block w-12 h-12 border-2 border-gray-500 hover:border-green-300 rounded-full text-center leading-[46px] cursor-pointer transition duration-1000">
                         <i className="lab la-twitter text-xl text-gray-500 group-hover:text-green-300 transition duration-1000"></i>
                     </a>
                 </li>
