@@ -1,7 +1,8 @@
 import ScrollLink from '@/components/ScrollLink'
 function Sidebar() {
-    return (<div className="fixed  flex items-center h-screen right-10">
-        <ul className="flex flex-col  border border-gray-400 rounded-full py-8 px-5 gap-8">
+    return (<div className="fixed items-center h-screen right-10 hidden lg:flex">
+       
+        <ul className="neonText flex flex-col  border border-gray-400 rounded-full py-8 px-5 gap-8">
             <li>
                 <ScrollLink href="introduce" className="">
                     <i className="text-xl text-gray-400 las la-home"></i>
@@ -28,9 +29,9 @@ function Sidebar() {
                 </a>
             </li>
             <li>
-                <a className="">
+                <ScrollLink href='contact' className="">
                     <i className="text-xl las text-gray-400 la-envelope"></i>
-                </a>
+                </ScrollLink>
             </li>
         </ul>
     </div>);

@@ -31,7 +31,7 @@ body {
 }
 
 .activeScroll i {
-  color: rgb(74, 222, 128) !important;
+  animation: flicker 1.5s infinite alternate;
 }
 
 .neonText:hover {
@@ -66,4 +66,75 @@ body {
     box-shadow: none;
     outline: none;
   }
+}
+
+*::-webkit-scrollbar {
+  width: 2px;
+}
+ 
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+}
+ 
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.neonFont {
+  animation: flicker 1.5s infinite alternate;
+  color: #fff;
+}
+
+@keyframes flicker {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+      text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #0fa,
+      0 0 80px #0fa,
+      0 0 90px #0fa,
+      0 0 100px #0fa,
+      0 0 150px #0fa;
+  
+  }
+  
+  20%, 24%, 55% {        
+      text-shadow: none;
+  }    
+}
+
+
+@keyframes outlineComplete {
+  0% {
+    stroke-dashoffset: 1000; /* Start with the outline fully hidden */
+  }
+  100% {
+    stroke-dashoffset: 0; /* Complete the outline path */
+  }
+}
+
+@keyframes neonOutline {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    box-shadow:
+      0 0 .2rem #fff,
+      0 0 .2rem #fff,
+      0 0 2rem #bc13fe,
+      0 0 0.8rem #bc13fe,
+      0 0 2.8rem #bc13fe,
+      inset 0 0 1.3rem #bc13fe;
+    outline: 0.2rem solid #fff;
+  }
+  
+  20%, 24%, 55% {        
+    box-shadow: none;
+    outline: none;
+  }    
+}
+
+.neonOutLinePath {
+  animation: neonOutline 3s infinite, outlinePath 3s forwards;  /* Adjust the durations as needed */
 }

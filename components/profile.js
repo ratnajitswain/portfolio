@@ -1,8 +1,8 @@
-import me from "@/assets/images/me.jpg";
+import me from "@/assets/images/me1.jpg";
 import Image from "next/image";
 function Profile() {
     return (
-        <div className=" border border-gray-500 rounded-3xl p-7 text-center max-w-[350px] relative md:fixed md:left-5">
+        <div className=" border border-gray-500 rounded-3xl p-7 text-center max-w-[350px] relative lg:fixed lg:left-5">
             <div className="flex justify-between">
                 <h2 className=" font-bold text-4xl">Ratnajit</h2>
                 <div className=" max-w-28 text-right">Full Stack Web Developer</div>
