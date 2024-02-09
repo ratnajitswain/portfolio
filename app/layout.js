@@ -16,8 +16,8 @@ export default function RootLayout({ children }) {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"></link>
       </head>
       <body className={inter.className}>{children}
-      <div id="shabd-translation"></div>
-      <script strategy="afterInteractive" src="https://shabd-testing.s3.us-east-2.amazonaws.com/obs-shabd.js"/>
+      {/* <div id="shabd-translation"></div> */}
+      {/* <script strategy="afterInteractive" src="https://shabd-testing.s3.us-east-2.amazonaws.com/obs-shabd.js"/> */}
       </body>
       
     </html>
