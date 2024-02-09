@@ -139,3 +139,26 @@ body {
 .neonOutLinePath {
   animation: neonOutline 3s infinite, outlinePath 3s forwards;  /* Adjust the durations as needed */
 }
+
+#shabd-translation{
+  float: right;
+  bottom: 5;
+  padding: 5px;
+}
+#shabd-translation  select{
+  background: transparent;
+  color: white;
+  outline: none;
+  font-size: 15px;
+  cursor: pointer;
+  /* padding: 5px; */
+}
+
+#shabd-translation option{
+  background-color: black;
+  color: white;
+  padding: 5px;
+  outline: none;
+  margin-top: 5px;
+  border: none;
+}

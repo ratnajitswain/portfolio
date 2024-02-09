@@ -25,7 +25,7 @@ function Experience() {
         <h2 className=" text-4xl leading-normal capitalize">
             <span className="text-green-300">Experience</span>
         </h2>
-        <div class="mt-16 ">
+        <div className="mt-16 ">
           {expreriences.map((d, i)=>(
             <ScrollAnimation key={i} {...d.animateIn}>
                 <TimeLineElement key={i} data={d}></TimeLineElement>
