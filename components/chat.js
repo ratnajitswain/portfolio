@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react';
-
+import { marked } from 'marked';
 const initialAI = { role: 'ai', content: "Hello! I'm Ratnajit's AI assistant. Feel free to ask me anything about his skills, experience, or projects as a Full Stack Web Developer." }
 
 const ChatBot = () => {
@@ -201,7 +201,7 @@ const ChatBot = () => {
                                 </span>
                                 <p className="leading-relaxed">
                                     <span className="block font-bold text-white">{message.role === 'ai' ? 'AI Assistant' : 'You'} </span>
-                                    {message.content}
+                                    {marked.parse(message.content)}
                                 </p>
                             </div>
                         ))}
