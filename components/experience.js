@@ -2,7 +2,16 @@ import TimeLineElement from '@/components/timeline-element';
 import ScrollAnimation from 'react-animate-on-scroll';
 const expreriences = [
     {
-        date:"09/2021-Present",
+        date:"05/2024-Present",
+        exs:[
+            {title:"Senior Software Developer",
+            company:"Involead Services Pvt. Ltd.",
+            desc:""}
+        ],
+        animateIn:{animateIn:"fadeInUp",delay:0.3 * 1000, offset:50}
+    },
+    {
+        date:"09/2021-05/2024",
         exs:[
             {title:"Software Developer",
             company:"Triedent Analytical Solutions Pvt. Ltd.",
