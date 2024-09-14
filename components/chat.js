@@ -10,7 +10,7 @@ const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [inputValue, setInputValue] = useState('');
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState([initialAI]);
     const [isLoading, setIsLoading] = useState(false);
     const chatWindowRef = useRef(null);
     const chatButtonRef = useRef(null);
@@ -29,9 +29,9 @@ const ChatBot = () => {
         }
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem('chatHistory', JSON.stringify(messages));
-    }, [messages]);
+    // useEffect(() => {
+    //     localStorage.setItem('chatHistory', JSON.stringify(messages));
+    // }, []);
 
     useEffect(() => {
         if (isOpen && chatWindowRef.current) {
@@ -85,12 +85,12 @@ const ChatBot = () => {
     const sendMessage = async (e) => {
         e.preventDefault();
         if (!inputValue.trim()) return;
-
+    
         const userMessage = { role: 'user', content: inputValue };
         setMessages(prevMessages => [...prevMessages, userMessage]);
         setInputValue('');
         setIsLoading(true);
-
+    
         try {
             const response = await fetch('/api/chat', {
                 method: 'POST',
@@ -102,31 +102,54 @@ const ChatBot = () => {
                     history: messages.slice(-5)
                 }),
             });
-
+    
             if (!response.ok) {
                 throw new Error('Failed to get response from AI');
             }
-
+    
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let aiMessage = { role: 'ai', content: '' };
-
+    
             while (true) {
                 const { value, done } = await reader.read();
                 if (done) break;
                 
                 const chunk = decoder.decode(value);
-                const lines = chunk.split('\n\n');
+                const lines = chunk.split('\n');
                 
                 for (const line of lines) {
                     if (line.startsWith('data: ')) {
-                        const data = JSON.parse(line.slice(6));
+                        const data = line.slice(6).trim();
                         if (data === '[DONE]') {
-                            setMessages(prevMessages => [...prevMessages, aiMessage]);
+                            setMessages(prevMessages => {
+                                const lastMessage = prevMessages[prevMessages.length - 1];
+                                if (lastMessage.role === 'ai') {
+                                    return [...prevMessages.slice(0, -1), aiMessage];
+                                } else {
+                                    return [...prevMessages, aiMessage];
+                                }
+                            });
+                            localStorage.setItem('chatHistory', JSON.stringify(messages));
+                            setIsLoading(false);
                             break;
                         }
-                        aiMessage.content += data.text;
-                        setMessages(prevMessages => [...prevMessages.slice(0, -1), aiMessage]);
+                        try {
+                            const parsedData = JSON.parse(data);
+                            aiMessage.content += parsedData.text;
+                            setMessages(prevMessages => {
+                                const lastMessage = prevMessages[prevMessages.length - 1];
+                                if (lastMessage.role === 'ai') {
+                                    return [...prevMessages.slice(0, -1), aiMessage];
+                                } else {
+                                    return [...prevMessages, aiMessage];
+                                }
+                            });
+                            localStorage.setItem('chatHistory', JSON.stringify(messages));
+                            setIsLoading(false);
+                        } catch (error) {
+                            console.error('Error parsing JSON:', error);
+                        }
                     }
                 }
             }
