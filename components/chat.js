@@ -201,7 +201,7 @@ const ChatBot = () => {
                                 </span>
                                 <p className="leading-relaxed">
                                     <span className="block font-bold text-white">{message.role === 'ai' ? 'AI Assistant' : 'You'} </span>
-                                    {marked.parse(message.content)}
+                                    <div dangerouslySetInnerHTML={{__html:marked.parse(message.content)}}></div>
                                 </p>
                             </div>
                         ))}
