@@ -85,12 +85,12 @@ const ChatBot = () => {
     const sendMessage = async (e) => {
         e.preventDefault();
         if (!inputValue.trim()) return;
-    
+
         const userMessage = { role: 'user', content: inputValue };
         setMessages(prevMessages => [...prevMessages, userMessage]);
         setInputValue('');
         setIsLoading(true);
-    
+
         try {
             const response = await fetch('/api/chat', {
                 method: 'POST',
@@ -102,28 +102,29 @@ const ChatBot = () => {
                     history: messages.slice(-5)
                 }),
             });
-    
+
             if (!response.ok) {
                 throw new Error('Failed to get response from AI');
             }
-    
+
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let aiMessage = { role: 'ai', content: '' };
-    
+
             while (true) {
                 const { value, done } = await reader.read();
                 if (done) break;
-                
+
                 const chunk = decoder.decode(value);
                 const lines = chunk.split('\n');
-                
+
                 for (const line of lines) {
                     if (line.startsWith('data: ')) {
                         const data = line.slice(6).trim();
                         if (data === '[DONE]') {
                             setMessages(prevMessages => {
                                 const lastMessage = prevMessages[prevMessages.length - 1];
+                                aiMessage.content = aiMessage.content;
                                 if (lastMessage.role === 'ai') {
                                     return [...prevMessages.slice(0, -1), aiMessage];
                                 } else {
@@ -137,6 +138,7 @@ const ChatBot = () => {
                         try {
                             const parsedData = JSON.parse(data);
                             aiMessage.content += parsedData.text;
+                            aiMessage.content = aiMessage.content;
                             setMessages(prevMessages => {
                                 const lastMessage = prevMessages[prevMessages.length - 1];
                                 if (lastMessage.role === 'ai') {
@@ -166,6 +168,11 @@ const ChatBot = () => {
         setMessages([initialAI]);
         localStorage.setItem('chatHistory', JSON.stringify([initialAI]));
     };
+
+    const trimMessageContent = (content) => {
+        const parts = content.split('||||');
+        return parts.length > 1 ? parts[0].trim() : content.trim();
+      };
 
     return (
         <>
@@ -224,11 +231,11 @@ const ChatBot = () => {
                                     <div className={`rounded-full ${message.role === 'ai' ? 'bg-gray-600 border-gray-500' : 'bg-blue-500 border-blue-400'} border p-1`}>
                                         {message.role === 'ai' ? (
                                             <div className="w-full h-full overflow-hidden rounded-full">
-                                            <Image
-                                                className="object-cover w-full h-full" 
-                                                alt="Ratnajit Swain"
-                                                src={me}
-                                            />
+                                                <Image
+                                                    className="object-cover w-full h-full"
+                                                    alt="Ratnajit Swain"
+                                                    src={me}
+                                                />
                                             </div>
                                         ) : (
                                             <svg stroke="none" fill="white" strokeWidth="0" viewBox="0 0 16 16" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
@@ -239,7 +246,7 @@ const ChatBot = () => {
                                 </span>
                                 <p className="leading-relaxed">
                                     <span className="block font-bold text-white">{message.role === 'ai' ? 'Ratnajit' : 'You'} </span>
-                                    <div dangerouslySetInnerHTML={{__html:marked.parse(message.content)}}></div>
+                                    <div dangerouslySetInnerHTML={{ __html: marked.parse(trimMessageContent(message.content)) }}></div>
                                 </p>
                             </div>
                         ))}
@@ -247,25 +254,16 @@ const ChatBot = () => {
                             <div className="flex gap-3 my-4 text-gray-200 text-sm flex-1">
                                 <span className="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
                                     <div className="rounded-full bg-gray-600 border border-gray-500 p-1">
-                                        <svg
-                                            stroke="none"
-                                            fill="white"
-                                            strokeWidth="1.5"
-                                            viewBox="0 0 24 24"
-                                            aria-hidden="true"
-                                            height="20"
-                                            width="20"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
-                                            ></path>
-                                        </svg>
+                                        <div className="w-full h-full overflow-hidden rounded-full">
+                                            <Image
+                                                className="object-cover w-full h-full"
+                                                alt="Ratnajit Swain"
+                                                src={me}
+                                            />
+                                        </div>
                                     </div>
                                 </span>
-                                <p className="leading-relaxed">Thinking...</p>
+                                <p className="leading-relaxed">Typing...</p>
                             </div>
                         )}
                         <div ref={messagesEndRef} />
