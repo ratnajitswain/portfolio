@@ -17,6 +17,8 @@ const ChatBot = () => {
             const savedMessages = localStorage.getItem('chatHistory');
             if (savedMessages) {
                 setMessages(JSON.parse(savedMessages));
+            }else{
+                setMessages([initialAI]);
             }
         } catch (error) {
             setMessages([initialAI]);
