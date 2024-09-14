@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { marked } from 'marked';
 import me from "@/assets/images/me1.jpg";
+import Image from 'next/image';
 const initialAI = { role: 'ai', content: "Hello! I'm Ratnajit. Feel free to ask me anything about my skills, experience, or projects as a Full Stack Web Developer." }
 
 const ChatBot = () => {
