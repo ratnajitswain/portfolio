@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react';
 import { marked } from 'marked';
-const initialAI = { role: 'ai', content: "Hello! I'm Ratnajit's AI assistant. Feel free to ask me anything about his skills, experience, or projects as a Full Stack Web Developer." }
+const initialAI = { role: 'ai', content: "Hello! I'm Ratnajit. Feel free to ask me anything about my skills, experience, or projects as a Full Stack Web Developer." }
 
 const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
