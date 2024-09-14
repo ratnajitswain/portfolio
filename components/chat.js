@@ -96,7 +96,7 @@ const ChatBot = () => {
                 },
                 body: JSON.stringify({
                     message: inputValue,
-                    history: messages.slice(-5) // Send last 5 messages for context
+                    history: messages.slice(-5)
                 }),
             });
 
@@ -104,9 +104,29 @@ const ChatBot = () => {
                 throw new Error('Failed to get response from AI');
             }
 
-            const data = await response.json();
-            const aiMessage = { role: 'ai', content: data.reply };
-            setMessages(prevMessages => [...prevMessages, aiMessage]);
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let aiMessage = { role: 'ai', content: '' };
+
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                
+                const chunk = decoder.decode(value);
+                const lines = chunk.split('\n\n');
+                
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        const data = JSON.parse(line.slice(6));
+                        if (data === '[DONE]') {
+                            setMessages(prevMessages => [...prevMessages, aiMessage]);
+                            break;
+                        }
+                        aiMessage.content += data.text;
+                        setMessages(prevMessages => [...prevMessages.slice(0, -1), aiMessage]);
+                    }
+                }
+            }
         } catch (error) {
             console.error('Error sending message:', error);
             const errorMessage = { role: 'ai', content: 'Sorry, I encountered an error. Please try again.' };
