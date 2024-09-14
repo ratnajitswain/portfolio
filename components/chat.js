@@ -194,7 +194,7 @@ const ChatBot = () => {
                                             //     ></path>
                                             // </svg>
                                             <Image
-                                            className="h-5 w-5 object-cover" 
+                                            className="object-cover" 
                                             src={me}></Image>
                                         ) : (
                                             <svg stroke="none" fill="white" strokeWidth="0" viewBox="0 0 16 16" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
