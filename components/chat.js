@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from 'react';
 import { marked } from 'marked';
-import me from "@/assets/images/me1.jpg";
+import me from "@/assets/images/me2.jpg";
 import Image from 'next/image';
 const initialAI = { role: 'ai', content: "Hello! I'm Ratnajit. Feel free to ask me anything about my skills, experience, or projects as a Full Stack Web Developer." }
 
@@ -198,8 +198,6 @@ const ChatBot = () => {
                                                 className="object-cover w-full h-full" 
                                                 alt="Ratnajit Swain"
                                                 src={me}
-                                                width={32}
-                                                height={32}
                                             />
                                         </div>
                                         ) : (
@@ -210,7 +208,7 @@ const ChatBot = () => {
                                     </div>
                                 </span>
                                 <p className="leading-relaxed">
-                                    <span className="block font-bold text-white">{message.role === 'ai' ? 'AI Assistant' : 'You'} </span>
+                                    <span className="block font-bold text-white">{message.role === 'ai' ? 'Ratnajit' : 'You'} </span>
                                     <div dangerouslySetInnerHTML={{__html:marked.parse(message.content)}}></div>
                                 </p>
                             </div>
