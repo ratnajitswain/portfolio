@@ -2,6 +2,7 @@ import Profile from "@/components/profile";
 import Home from "@/components/home";
 import Sidebar from "@/components/sidebar";
 import Particles from "@/components/particles";
+import ChatBot from "@/components/chat";
 export default function MainPage() {
  return (
   <div className="p-6 grid grid-cols-1 lg:grid-cols-7">
@@ -9,6 +10,7 @@ export default function MainPage() {
       <div className=" col-span-2"><Profile></Profile></div>
       <div className=" col-span-4"><Home></Home></div>
       <div className=" col-span-1  "><Sidebar></Sidebar></div>
+      <ChatBot></ChatBot>
   </div>
  )
 }
