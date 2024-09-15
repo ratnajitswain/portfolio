@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import mongoose from 'mongoose';
 import dbConnect from '@/libs/dbConnect';
 import Job from '@/models/Job';
 import Idea from '@/models/Idea';
