@@ -7,7 +7,8 @@ const nextConfig = {
       },
       env:{
         GOOGLE_AI_API_KEY:process.env.GOOGLE_AI_API_KEY,
-        MONGODB_URI:process.env.MONGODB_URI
+        MONGODB_URI:process.env.MONGODB_URI,
+        SYSTEM_PROMPT_KEY:process.env.SYSTEM_PROMPT_KEY
       }
 };
 
