@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import {readFileSync} from "fs";
+import path from "path";
 import dbConnect from '@/libs/dbConnect';
 import Job from '@/models/Job';
 import Idea from '@/models/Idea';
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
 
-const encryptedSystemPrompt = readFileSync('system_prompt.txt',{ encoding: 'utf8', flag: 'r' })
+const systemPromptPath = path.join(process.cwd(), 'assets', 'text', 'system_prompt.txt');
+let encryptedSystemPrompt = readFileSync(systemPromptPath, 'utf8');
 let systemPrompt = ""
 function decrypt(encryptedText, key) {
     if(systemPrompt)
