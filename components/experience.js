@@ -31,7 +31,7 @@ const expreriences = [
 ]
 function Experience() {
     return (<div className=" mt-16">
-        <h2 className=" text-4xl leading-normal capitalize">
+        <h2 className=" text-3xl md:text-4xl leading-normal capitalize">
             <span className="text-green-300">Experience</span>
         </h2>
         <div className="mt-16 ">

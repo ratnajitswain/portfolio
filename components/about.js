@@ -1,6 +1,6 @@
 function About() {
     return (<div className=" mt-16">
-        <h2 className=" text-4xl leading-normal capitalize">
+        <h2 className="text-3xl md:text-4xl leading-normal capitalize">
             Creating impactful digital solutions with React, Node.js and a passion for <span className="text-green-300">innovation</span>.
         </h2>
         <p className="text-base mt-10 leading-loose text-gray-400">

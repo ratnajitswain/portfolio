@@ -1,6 +1,6 @@
 function Introduce() {
     return (<div className=" mt-16">
-        <h1 className=" text-6xl lg:text-7xl">Hi, I Am <span className=" text-green-300">Ratnajit</span> Swain,
+        <h1 className=" text-4xl md:text-6xl lg:text-7xl">Hi, I Am <span className=" text-green-300">Ratnajit</span> Swain,
         A Full-Stack Web Developer
         </h1>
         <p className=" text-gray-400 text-base mt-16">Crafting seamless digital experiences through cutting-edge Full-Stack development expertise.</p>

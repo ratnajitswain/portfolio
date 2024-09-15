@@ -93,7 +93,7 @@ function Skills() {
         };
       }, []);
     return (<div className=" mt-16">
-    <h2 className=" text-4xl leading-normal capitalize">
+    <h2 className=" text-3xl md:text-4xl leading-normal capitalize">
         My area of <span className="text-green-300">expertise</span>
     </h2>
     <ul className='flex flex-wrap gap-5  mt-16'>

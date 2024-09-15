@@ -229,7 +229,7 @@ const ChatBot = () => {
                         backgroundColor: 'rgba(0, 0, 0, 0.75)',
                         backdropFilter: 'blur(10px)',
                     }}
-                    className="fixed bottom-[calc(4rem+1.5rem)] left-0  md:left-[unset] right-0  md:mr-4 p-6 rounded-lg border border-gray-600 w-[440px] h-[634px] text-white"
+                    className="fixed bottom-[calc(4rem+1.5rem)] left-0  md:left-[unset] right-0 mx-3 md:mx-0 md:mr-4 p-6 rounded-lg border border-gray-600 md:w-[440px] h-[634px] text-white"
                 >
                     <div className="flex flex-col space-y-1.5 pb-6">
                         <h2 className="font-semibold text-lg tracking-tight flex items-center">Chat with me <span className="ml-4 block w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span></h2>
@@ -242,7 +242,7 @@ const ChatBot = () => {
                             Clear Chat History
                         </button>
                     </div>
-                    <div className="pr-4 h-[465px] overflow-y-auto" style={{ minWidth: '100%' }}>
+                    <div className="md:pr-4 h-[465px] overflow-y-auto" style={{ minWidth: '100%' }}>
                         {messages.map((message, index) => (
                             <div key={index} className={`flex gap-3 my-4 text-sm flex-1 ${message.role === 'ai' ? 'text-gray-200' : 'text-white'}`}>
                                 <span className="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">

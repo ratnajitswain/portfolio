@@ -1,7 +1,7 @@
 function Contact() {
     return ( <>
     <div className=" mt-16">
-        <h2 className=" text-4xl leading-normal capitalize">
+        <h2 className=" text-3xl md:text-4xl leading-normal capitalize">
             let's have a  <span className="text-green-300">chat</span>
         </h2>
         <div className="mt-16 gap-6 flex flex-col">
