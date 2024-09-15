@@ -3,9 +3,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { marked } from 'marked';
 import me from "@/assets/images/me2.jpg";
 import Image from 'next/image';
-
 const initialAI = { role: 'ai', content: "Hello! I'm Ratnajit. Feel free to ask me anything about my skills, experience, or projects as a Full Stack Web Developer." }
-
+const audioUrls = [
+'/audio/message-sound.mp3',
+'/audio/message-sound-2.mp3'
+]
 const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
@@ -15,6 +17,19 @@ const ChatBot = () => {
     const chatWindowRef = useRef(null);
     const chatButtonRef = useRef(null);
     const messagesEndRef = useRef(null);
+    const audioRef = useRef(null);
+    const audioRef2 = useRef(null);
+    useEffect(() => {
+        audioRef.current = new Audio(audioUrls[0]);
+        audioRef2.current = new Audio(audioUrls[1]);
+    }, []);
+    const playMessageSound = () => {
+        if(!isOpen || !isVisible){
+            audioRef.current.play().catch(error => console.error("Error playing audio:", error));
+        }else{
+            audioRef2.current.play().catch(error => console.error("Error playing audio:", error));
+        }
+    };
 
     useEffect(() => {
         try {
@@ -133,6 +148,7 @@ const ChatBot = () => {
                             });
                             localStorage.setItem('chatHistory', JSON.stringify(messages));
                             setIsLoading(false);
+                            playMessageSound();
                             break;
                         }
                         try {
@@ -178,7 +194,7 @@ const ChatBot = () => {
         <>
             <button
                 ref={chatButtonRef}
-                className="fixed bottom-4 right-4 inline-flex items-center justify-center text-sm font-medium disabled:pointer-events-none disabled:opacity-50 border rounded-full w-16 h-16 bg-black hover:bg-gray-700 m-0 cursor-pointer border-gray-200 bg-none p-0 normal-case leading-5 hover:text-gray-900 transition-colors duration-200"
+                className="fixed bottom-4 right-4 inline-flex items-center neonText justify-center text-sm font-medium disabled:pointer-events-none disabled:opacity-50 rounded-full w-16 h-16 bg-blue-600 hover:bg-black m-0 cursor-pointer  bg-none p-0 normal-case leading-5 hover:text-gray-900 transition-colors duration-200"
                 type="button"
                 aria-haspopup="dialog"
                 aria-expanded={isOpen}
@@ -199,6 +215,7 @@ const ChatBot = () => {
                 >
                     <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" className="border-gray-200"></path>
                 </svg>
+                <div className="absolute top-2 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
             </button>
             {isOpen && (
                 <div
@@ -215,7 +232,8 @@ const ChatBot = () => {
                     className="fixed bottom-[calc(4rem+1.5rem)] left-0  md:left-[unset] right-0  md:mr-4 p-6 rounded-lg border border-gray-600 w-[440px] h-[634px] text-white"
                 >
                     <div className="flex flex-col space-y-1.5 pb-6">
-                        <h2 className="font-semibold text-lg tracking-tight">Chat with me</h2>
+                        <h2 className="font-semibold text-lg tracking-tight flex items-center">Chat with me <span className="ml-4 block w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span></h2>
+                        
                         <p className="text-sm text-gray-300 leading-3">Ask about my skills, projects, and experience</p>
                         <button
                             onClick={clearHistory}
@@ -279,7 +297,7 @@ const ChatBot = () => {
                             />
                             <button
                                 type="submit"
-                                className="inline-flex items-center justify-center rounded-md text-sm font-medium text-black disabled:pointer-events-none disabled:opacity-50 bg-white hover:bg-gray-200 h-10 px-4 py-2 transition-colors duration-200"
+                                className="neonText inline-flex items-center justify-center rounded-md text-sm font-medium text-white border border-white disabled:pointer-events-none disabled:opacity-50 bg-black hover:bg-transparent h-10 px-4 py-2 transition-colors duration-200"
                                 disabled={isLoading}
                             >
                                 Send

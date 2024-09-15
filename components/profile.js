@@ -33,7 +33,7 @@ function Profile() {
                     </a>
                 </li>
             </ul>
-            <a className=" inline-flex bg-green-400 text-black rounded-3xl w-full justify-center items-center py-3 text-lg mt-5">
+            <a className=" cursor-pointer neonText inline-flex bg-green-400 hover:bg-black hover:text-white text-black rounded-3xl w-full justify-center items-center py-3 text-lg mt-5">
                 <i className="las la-envelope text-2xl mr-2"></i>
                 Hire me</a>
         </div>
