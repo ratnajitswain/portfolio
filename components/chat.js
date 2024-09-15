@@ -73,7 +73,7 @@ const ChatBot = () => {
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [messages]);
+    }, [messages, isOpen, isVisible]);
 
     const toggleChat = () => {
         if (isOpen) {
