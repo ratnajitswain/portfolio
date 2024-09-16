@@ -3,11 +3,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { marked } from 'marked';
 import me from "@/assets/images/me2.jpg";
 import Image from 'next/image';
+
 const initialAI = { role: 'ai', content: "Hello! I'm Ratnajit. Feel free to ask me anything about my skills, experience, or projects as a Full Stack Web Developer." }
 const audioUrls = [
-'/audio/message-sound.mp3',
-'/audio/message-sound-2.mp3'
+    '/audio/message-sound.mp3',
+    '/audio/message-sound-2.mp3'
 ]
+
 const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
@@ -19,10 +21,12 @@ const ChatBot = () => {
     const messagesEndRef = useRef(null);
     const audioRef = useRef(null);
     const audioRef2 = useRef(null);
+
     useEffect(() => {
         audioRef.current = new Audio(audioUrls[0]);
         audioRef2.current = new Audio(audioUrls[1]);
     }, []);
+
     const playMessageSound = () => {
         if(!isOpen || !isVisible){
             audioRef.current.play().catch(error => console.error("Error playing audio:", error));
@@ -43,10 +47,6 @@ const ChatBot = () => {
             setMessages([initialAI]);
         }
     }, []);
-
-    // useEffect(() => {
-    //     localStorage.setItem('chatHistory', JSON.stringify(messages));
-    // }, []);
 
     useEffect(() => {
         if (isOpen && chatWindowRef.current) {
@@ -188,7 +188,7 @@ const ChatBot = () => {
     const trimMessageContent = (content) => {
         const parts = content.split('||||');
         return parts.length > 1 ? parts[0].trim() : content.trim();
-      };
+    };
 
     return (
         <>
@@ -229,11 +229,10 @@ const ChatBot = () => {
                         backgroundColor: 'rgba(0, 0, 0, 0.75)',
                         backdropFilter: 'blur(10px)',
                     }}
-                    className="fixed bottom-[calc(4rem+1.5rem)] left-0  md:left-[unset] right-0 mx-3 md:mx-0 md:mr-4 p-6 rounded-lg border border-gray-600 md:w-[440px] h-[634px] text-white"
+                    className="fixed bottom-[calc(4rem+1.5rem)] left-0 right-0 mx-3 md:mx-0 md:right-4 p-6 rounded-lg border border-gray-600 w-auto md:w-[440px] max-h-[80vh] flex flex-col text-white"
                 >
-                    <div className="flex flex-col space-y-1.5 pb-6">
+                    <div className="flex flex-col space-y-1.5 pb-4">
                         <h2 className="font-semibold text-lg tracking-tight flex items-center">Chat with me <span className="ml-4 block w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span></h2>
-                        
                         <p className="text-sm text-gray-300 leading-3">Ask about my skills, projects, and experience</p>
                         <button
                             onClick={clearHistory}
@@ -242,7 +241,7 @@ const ChatBot = () => {
                             Clear Chat History
                         </button>
                     </div>
-                    <div className="md:pr-4 h-[465px] overflow-y-auto" style={{ minWidth: '100%' }}>
+                    <div className="flex-grow overflow-y-auto pr-2">
                         {messages.map((message, index) => (
                             <div key={index} className={`flex gap-3 my-4 text-sm flex-1 ${message.role === 'ai' ? 'text-gray-200' : 'text-white'}`}>
                                 <span className="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
@@ -286,7 +285,7 @@ const ChatBot = () => {
                         )}
                         <div ref={messagesEndRef} />
                     </div>
-                    <div className="flex items-center pt-0">
+                    <div className="flex items-center pt-4">
                         <form onSubmit={sendMessage} className="flex items-center justify-center w-full space-x-2">
                             <input
                                 className="flex h-10 w-full rounded-md border border-gray-600 px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50 text-white bg-gray-700 focus-visible:ring-offset-2"
