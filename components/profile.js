@@ -8,8 +8,8 @@ function Profile() {
                 <div className=" max-w-28 text-right">Full Stack Web Developer</div>
             </div>
             <Image className="rounded-3xl max-w-64 ml-auto mr-auto mt-5 mb-6 object-contain" src={me}></Image>
-            <h3 className="text-xl md:text-2xl">ratnajitswain@gmail.com</h3>
-            <h3 className="text-xl md:text-2xl mt-2">Bhubaneswar, Odisha</h3>
+            <h3 className="text-xl md:text-2xl">hello@ratnajitswain.com</h3>
+            <h3 className="text-xl md:text-xl mt-2">Bhubaneswar, Odisha</h3>
             <p className=" text-sm text-gray-400 mt-5">© 2024 Ratnajit. All Rights Reserved</p>
             <ul className=" flex justify-center items-center flex-wrap gap-2 mt-5">
                 <li>
